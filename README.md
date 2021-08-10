@@ -1,5 +1,5 @@
 # Attention-mechanism-implementation
-**Self-attention、Non-local、SE、SK、CBAM、DANet**
+**pytorch for Self-attention、Non-local、SE、SK、CBAM、DANet**
 
    According to the different application domains of the attention mechanism, that is, the different ways and positions of attention weights are applied, the article divides the attention mechanism into spatial domain, channel domain and hybrid domain, and introduces some advanced aspects of these different attentions. Attention model, carefully analyzed their design methods and application fields, and finally proved the effectiveness of these attention mechanisms and the improvement of the results brought by CV tasks with experimental methods.
    
