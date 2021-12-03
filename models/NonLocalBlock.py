@@ -24,7 +24,6 @@ class NonLocalBlock(nn.Module):
         # [N, H * W, H * W]
         mul_theta_phi = torch.matmul(x_theta, x_phi)
         mul_theta_phi = self.softmax(mul_theta_phi)
-        # print(mul_theta_phi[0,:,0])
         # [N, H * W, C/2]
         mul_theta_phi_g = torch.matmul(mul_theta_phi, x_g)
         # [N, C/2, H, W]
