@@ -113,7 +113,7 @@ class ResNet(nn.Module):
 def ResNet18(**kwargs):
     return ResNet(BasicBlock, [2, 2, 2, 2],**kwargs)
 
-net = ResNet18(num_classes=10).cuda()
+net = ResNet18(num_classes=100).cuda()
 # y = net(torch.randn(1, 3, 32, 32))
 # print(y.size())
 
@@ -218,7 +218,7 @@ def train(trainloader, model, criterion, optimizer, epoch):
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
-    return top1.avg
+    return 100-top1.avg
 
 def validate(val_loader, model, criterion):
 
@@ -238,20 +238,21 @@ def validate(val_loader, model, criterion):
             losses.update(loss.item(), input.size(0))
             top1.update(prec.item(), input.size(0))
 
-    print(' * Prec {top1.avg:.3f}% '.format(top1=top1))
+    # print(' * Prec {top1.avg:.3f}% '.format(top1=top1))
 
-    return top1.avg
+    return 100-top1.avg
 best_prec = 0
 for e in range(epoch):
         train_scheduler.step( e)
 
         # train for one epoch
-        train(trainloader, net, loss_function, optimizer, e)
+        train_acc=train(trainloader, net, loss_function, optimizer, e)
 
         # evaluate on test set
-        prec = validate(valloader, net, loss_function)
+        test_acc = validate(valloader, net, loss_function)
 
+        print('epoch:{}  train_acc:{:.3}  test_acc:{:.3} '.format(e,train_acc,test_acc))
         # remember best precision and save checkpoint
-        is_best = prec > best_prec
-        best_prec = max(prec,best_prec)
+        is_best = test_acc > best_prec
+        best_prec = max(test_acc,best_prec)
 print(best_prec)
