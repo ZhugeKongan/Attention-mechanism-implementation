@@ -253,6 +253,6 @@ for e in range(epoch):
 
         print('epoch:{}  train_acc:{:.3}  test_acc:{:.3} '.format(e,train_acc,test_acc))
         # remember best precision and save checkpoint
-        is_best = test_acc > best_prec
+        # is_best = test_acc > best_prec
         best_prec = max(test_acc,best_prec)
 print(best_prec)
